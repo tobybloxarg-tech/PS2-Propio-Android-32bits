@@ -23,7 +23,9 @@ void CGSH_OpenGLAndroid::InitializeImpl()
 	static const EGLint configAttribs[] =
 	    {
 	        EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
-	        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+	        // The context below explicitly requests OpenGL ES 3.0.
+	        // EGL_OPENGL_ES2_BIT is not sufficient on every EGL implementation.
+	        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES3_BIT_KHR,
 	        EGL_BLUE_SIZE, 8,
 	        EGL_GREEN_SIZE, 8,
 	        EGL_RED_SIZE, 8,
