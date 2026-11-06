@@ -3,6 +3,12 @@
 #include "GSH_OpenGLAndroid.h"
 #include "AppConfig.h"
 
+// The Android EGL headers in some NDK versions omit the KHR extension token,
+// although the EGL_KHR_create_context / ES3 config bit is standardized as 0x0040.
+#ifndef EGL_OPENGL_ES3_BIT_KHR
+#define EGL_OPENGL_ES3_BIT_KHR 0x00000040
+#endif
+
 CGSH_OpenGLAndroid::CGSH_OpenGLAndroid(NativeWindowType window)
     : m_window(window)
 {
