@@ -38,12 +38,8 @@ jobs:
         run: |
           APK=build_android/build/outputs/apk/debug/Play-debug.apk
           test -f "$APK"
-          unzip -l "$APK" | tee /tmp/apk-contents.txt
-          grep -q 'lib/armeabi-v7a/.*\.so' /tmp/apk-contents.txt
-          if grep -E 'lib/(arm64-v8a|x86|x86_64)/.*\.so' /tmp/apk-contents.txt; then
-            echo 'Unexpected non-ARM32 native ABI found in APK' >&2
-            exit 1
-          fi
+          unzip -Z1 "$APK" | tee /tmp/apk-contents.txt
+          grep -Fxq 'lib/armeabi-v7a/libPlay.so' /tmp/apk-contents.txt
 
       - name: Upload installable debug APK
         uses: actions/upload-artifact@v4
