@@ -26,7 +26,8 @@ jobs:
           java-version: '17'
 
       - name: Install Android NDK and CMake
-        run: "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;29.0.14206865" "cmake;3.31.1"
+        run: |
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;29.0.14206865" "cmake;3.31.1"
 
       - name: Create temporary signing key
         run: keytool -genkeypair -v -keystore "$RUNNER_TEMP/test-release.jks" -storepass testpass123 -keypass testpass123 -alias test -keyalg RSA -keysize 2048 -validity 2 -dname "CN=Zapia Test Build, OU=Test, O=Local, L=NA, S=NA, C=US"
